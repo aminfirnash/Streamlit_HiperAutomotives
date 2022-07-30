@@ -24,17 +24,30 @@ with col2:
     st.caption('Innovative Solution')
 
     st.header('building an automotive future'.capitalize())
-    #SubHeader
+    
     st.subheader('Reducing Global automobile emissions & hastening the electrification of vehicles.!'.capitalize())
+    
+    #Plot and visualize efficiency of different component
     def interactiveplots(df):
         comp = st.selectbox('Select to See Report Comparision', 
         options=['Injector','Railing', 'ECU'])
         if comp == 'Injector':
-            plot = px.line(df, x=df['iq'],y=df['iq_pred'], title='Fuel Injection Compared')
-            plot.show()      
+            plot = px.line(df[['iq','iq_pred']], title='Fuel Injection Compared')
+            st.plotly_chart(plot)
+        if comp == 'Railing':
+            plot = px.line(df[['rp','rp_pred']], title='Fuel Injection Compared')
+            st.plotly_chart(plot)  
+        if comp == 'ECU':
+            plot = px.line(df[['mu','mu_pred']], title='Fuel Injection Compared')
+            st.plotly_chart(plot)   
+    
+    #If TATA is selected
     if select == 'TATA':
         st.image('./Component Images/Background MH 12 PQ 5841.png', caption='Model-TATA 5841', width= 750)
+        #Load the csv file of the specific model
         df = pd.read_csv('AB 12 BC 3456.csv')
+        
+        #option menu to select graph or data
         grph = option_menu(
         menu_title='Visualize',
         options= ['Interactive Graph', 'Sample data'],
@@ -42,15 +55,22 @@ with col2:
         menu_icon='activity',
         orientation='horizontal'
     )
+    #Choose if you want to see an interactive graph or Sample of the data
         if grph == 'Interactive Graph':
             x = interactiveplots(df)
             x
         if grph == 'Sample data':
             y = df.sample(10)
             y
+
+    #If Ashok Leyland is Selected
     if select == 'AL':
         st.image('./Component Images/Background TN 34 AB 7345.png', caption='Model-AL 7345', width= 750)
+        
+        #Load the data of the model
         df = pd.read_csv('BC 12 CD 3456.csv')
+        
+        #option menu to select graph or data
         grph = option_menu(
         menu_title='Visualize',
         options= ['Interactive Graph', 'Sample data'],
@@ -58,12 +78,11 @@ with col2:
         menu_icon='activity',
         orientation='horizontal'
     )
+    
+    #Choose if you want to see an interactive graph or Sample of the data
         if grph == 'Interactive Graph':
-            x = df.head()
+            x = interactiveplots(df)
             x
         if grph == 'Sample data':
             y = df.sample(10)
             y
-
-df = pd.read_csv('vehicle_list.csv')
-st.dataframe(data=df, width=200)
