@@ -43,7 +43,7 @@ with col2:
     
     #If TATA is selected
     if select == 'TATA':
-        st.image('./Component Images/Background MH 12 PQ 5841.png', caption='Model-TATA 5841', width= 750)
+        st.image('Background MH 12 PQ 5841.png', caption='Model-TATA 5841', width= 750)
         #Load the csv file of the specific model
         df = pd.read_csv('AB 12 BC 3456.csv')
         
@@ -65,7 +65,7 @@ with col2:
 
     #If Ashok Leyland is Selected
     if select == 'AL':
-        st.image('./Component Images/Background TN 34 AB 7345.png', caption='Model-AL 7345', width= 750)
+        st.image('Background TN 34 AB 7345.png', caption='Model-AL 7345', width= 750)
         
         #Load the data of the model
         df = pd.read_csv('BC 12 CD 3456.csv')
